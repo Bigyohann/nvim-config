@@ -5,6 +5,9 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
+  opts = {
+    autoformat = false,
+  },
   config = function()
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
@@ -283,6 +286,18 @@ return {
       filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
     })
 
-    -- configure lua server (with special settings)
+    lspconfig["biome"].setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+      filetypes = { "json" },
+    })
+    local servers = { "html", "cssls", "tsserver", "clangd", "jsonls", "bashls", "lua_ls" }
+
+    for _, lsp in ipairs(servers) do
+      lspconfig[lsp].setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+      })
+    end
   end,
 }
