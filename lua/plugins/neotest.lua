@@ -18,7 +18,7 @@ return {
               REMOTE_PHPUNIT_BIN = "vendor/bin/phpunit",
             },
             phpunit_cmd = function()
-              return "/Users/bigyohann/.config/big/runtestscriptphp.sh"
+              return "~/.config/scripts/nvim/dockertestphp.sh"
             end,
           }),
         },

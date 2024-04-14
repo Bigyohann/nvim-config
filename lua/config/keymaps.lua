@@ -2,3 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 local map = LazyVim.safe_keymap_set
+
+vim.g.copilot_no_tab_map = true
+vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.keymap.set("n", "<C-h>", "<cmd>:TmuxNavigateLeft<CR>")
+vim.keymap.set("n", "<C-j>", "<cmd>:TmuxNavigateDown<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>:TmuxNavigateUp<CR>")
+vim.keymap.set("n", "<C-l>", "<cmd>:TmuxNavigateRight<CR>")

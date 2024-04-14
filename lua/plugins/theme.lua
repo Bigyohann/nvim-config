@@ -1,15 +1,15 @@
 return {
-  {
-    "navarasu/onedark.nvim",
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require("onedark").setup({
-        style = "cool",
-      })
-      require("onedark").load()
-    end,
-  },
+  -- {
+  --   "navarasu/onedark.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require("onedark").setup({
+  --       style = "cool",
+  --     })
+  --     require("onedark").load()
+  --   end,
+  -- },
   -- {
   --   "Shatur/neovim-ayu",
   --   lazy = false,
@@ -27,9 +27,14 @@ return {
   --   "sainnhe/edge",
   -- },
   {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
+  {
     "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "onedark",
-    },
+    opts = {},
+    colorscheme = "tokyonight",
   },
 }

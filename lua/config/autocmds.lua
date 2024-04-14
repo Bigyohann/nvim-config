@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Disable autoformat for lua files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "env" },
+  pattern = { "*" },
   callback = function()
     vim.b.autoformat = false
   end,
