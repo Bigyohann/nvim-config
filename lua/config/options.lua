@@ -4,4 +4,4 @@
 
 vim.o.guifont = "JetBrains Mono:h14"
 vim.opt.swapfile = false
-vim.opt.relativenumber = false
+vim.opt.relativenumber = true

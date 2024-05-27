@@ -4,9 +4,15 @@
 local map = LazyVim.safe_keymap_set
 
 vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+vim.api.nvim_set_keymap("i", "<C-j>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 vim.keymap.set("n", "<C-h>", "<cmd>:TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<C-j>", "<cmd>:TmuxNavigateDown<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>:TmuxNavigateUp<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd>:TmuxNavigateRight<CR>")
 vim.keymap.set("n", "<C-z>", "nop")
+
+-- resize windows
+vim.keymap.set("n", "<A-Up>", "<cmd>:resize +2<CR>")
+vim.keymap.set("n", "<A-Down>", "<cmd>:resize -2<CR>")
+vim.keymap.set("n", "<A-Left>", "<cmd>:vertical resize -2<CR>")
+vim.keymap.set("n", "<A-Right>", "<cmd>:vertical resize +2<CR>")
