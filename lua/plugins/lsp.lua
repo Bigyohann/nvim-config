@@ -212,6 +212,12 @@ return {
         new_config.cmd = cmd
       end,
     })
+    lspconfig["twiggy_language_server"].setup({
+      on_attach = on_attach,
+      capabilities = capabilities,
+      filetypes = { "twig" },
+      cmd = { 'twiggy-language-server', '--stdio' },
+    })
 
     local servers = {
       "html",
@@ -224,7 +230,6 @@ return {
       "dockerls",
       "yamlls",
       "docker_compose_language_service",
-      "pest_ls",
       "gopls",
     }
     for _, lsp in ipairs(servers) do
