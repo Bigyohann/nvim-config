@@ -1,7 +1,7 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   opts = {
-    ensure_installed = { "lua" },
+    ensure_installed = { "lua", "php","phpdoc", "angular", "css", "javascript", "json", "scss", "typescript", "vue" },
     highlight = {
       enable = true,
       use_languatree = true,
