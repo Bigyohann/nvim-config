@@ -35,7 +35,9 @@ return {
   },
   {
     "LazyVim/LazyVim",
-    opts = {},
-    colorscheme = "tokyonight",
+    opts = {
+      colorscheme = "tokyonight-storm",
+    },
+    colorscheme = "tokyonight-storm",
   },
 }

@@ -6,9 +6,6 @@ return {
       trigger_events = {
         defer_save = { "InsertLeave", "TextChanged" },
       },
-      execution_message = {
-        enabled = false,
-      },
     },
   },
 }

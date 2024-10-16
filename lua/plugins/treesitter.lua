@@ -10,7 +10,6 @@ return {
     indent = {
       enable = true,
       disable = {
-        "php",
       },
     },
   },
