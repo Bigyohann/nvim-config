@@ -31,6 +31,17 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
+      plugins = {
+        cmp = false
+      }
+    },
+  },
+  {
+    "navarasu/onedark.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = 'deep'
     },
   },
   {
