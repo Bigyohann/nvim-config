@@ -1,0 +1,26 @@
+{
+    "function __construct": {
+        "prefix": ["__construct", "__con"],
+        "body": [
+            "public function __construct(${1: priarg}) {",
+            "}"
+        ],
+        "description": "Create __construct method using the last php syntax."
+    },
+  "function __invoke": {
+        "prefix": ["__invoke", "__inv"],
+        "body": [
+            "public function __invoke(${1: priarg}) {",
+            "}"
+        ],
+        "description": "Create __invoke method using the last php syntax."
+    },
+    "public function": {
+        "prefix": ["public function", "pubfun"],
+        "body": [
+            "public function ${1: functionName}(${2: arg}) {",
+            "}"
+        ],
+        "description": "Create a public function using the last php syntax."
+    }
+}
