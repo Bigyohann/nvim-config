@@ -10,10 +10,7 @@ vim.keymap.set("n", "<C-j>", "<cmd>:TmuxNavigateDown<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>:TmuxNavigateUp<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd>:TmuxNavigateRight<CR>")
 vim.keymap.set("n", "<C-z>", "nop")
-vim.keymap.set("n","<leader>ff", "<cmd> FzfLua lsp_live_workspace_symbols<cr>")
-vim.keymap.set("n","<leader><leader>", "<cmd> FzfLua files<cr>")
-vim.keymap.set("n","<leader>fw", "<cmd> FzfLua live_grep<cr>")
-vim.keymap.set("n","<leader>fb", "<cmd> FzfLua tabs<cr>")
+
 -- resize windows
 vim.keymap.set("n", "<A-Up>", "<cmd>:resize +2<CR>")
 vim.keymap.set("n", "<A-Down>", "<cmd>:resize -2<CR>")
