@@ -6,3 +6,5 @@ vim.o.guifont = "JetBrains Mono:h14"
 vim.opt.swapfile = false
 vim.opt.relativenumber = true
 
+-- Disable animations
+vim.g.snacks_animate = false
