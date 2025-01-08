@@ -18,3 +18,5 @@ vim.keymap.set("n", "<A-Left>", "<cmd>:vertical resize -2<CR>")
 vim.keymap.set("n", "<A-Right>", "<cmd>:vertical resize +2<CR>")
 
 vim.keymap.set("n", "<leader>ba", "<cmd>:bufdo bd<CR>")
+vim.keymap.set("n", "<leader>rn", ":IncRename ")
+
