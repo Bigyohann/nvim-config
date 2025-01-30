@@ -223,7 +223,7 @@ return {
     local servers = {
       "html",
       "cssls",
-      "tsserver",
+      "ts_ls",
       "clangd",
       "jsonls",
       "bashls",
@@ -232,6 +232,8 @@ return {
       "yamlls",
       "docker_compose_language_service",
       "gopls",
+      "gitlab_ci_ls",
+      "yamlls"
     }
     for _, lsp in ipairs(servers) do
       lspconfig[lsp].setup({

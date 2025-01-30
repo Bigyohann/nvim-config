@@ -12,10 +12,16 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Disable autoformat for lua files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "*" },
+  pattern = { "lua", "php", "yml", "yaml" },
   callback = function()
     vim.b.autoformat = false
   end,
 })
 
-
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.gitlab-ci*.{yml,yaml}",
+  callback = function()
+    vim.bo.filetype = "yaml.gitlab"
+    vim.b.autoformat = false
+  end,
+})
