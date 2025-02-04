@@ -213,6 +213,7 @@ return {
         new_config.cmd = cmd
       end,
     })
+
     lspconfig["twiggy_language_server"].setup({
       on_attach = on_attach,
       capabilities = capabilities,
