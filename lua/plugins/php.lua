@@ -1,6 +1,6 @@
 return {
   {
-    "ta-tikoma/php.easy.nvim",
+    "jorismak/php.easy.nvim",
     config = true,
     keys = {
       { "-b", "<CMD>PHPEasyDocBlock<CR>" },

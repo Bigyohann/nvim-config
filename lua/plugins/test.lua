@@ -11,7 +11,7 @@ return {
           },
           filter_dirs = { "vendor" },
           phpunit_cmd = function()
-            return '/Users/bigyohann/.config/scripts/nvim/dockertestphp.sh'
+            return "/Users/bigyohann/.config/scripts/nvim/dockertestphp.sh"
           end,
         },
       },

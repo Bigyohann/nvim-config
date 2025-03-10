@@ -18,6 +18,18 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+vim.filetype.add({
+  pattern = {
+    [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+  },
+})
+
+vim.filetype.add({
+  pattern = {
+    [".*%.blade%.php"] = "blade"
+  },
+})
+
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.gitlab-ci*.{yml,yaml}",
   callback = function()
