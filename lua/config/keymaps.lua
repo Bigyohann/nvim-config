@@ -11,6 +11,10 @@ vim.keymap.set("n", "<C-k>", "<cmd>:TmuxNavigateUp<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd>:TmuxNavigateRight<CR>")
 vim.keymap.set("n", "<C-z>", "nop")
 
+vim.keymap.set("n", "<leader>md", '$F"ci"@datetime@<Esc>')
+vim.keymap.set("n", "<leader>mt", '$F"ci"@date@<Esc>')
+vim.keymap.set("n", "<leader>ms", '$F"ci"@string@<Esc>')
+
 -- resize windows
 vim.keymap.set("n", "<A-Up>", "<cmd>:resize +2<CR>")
 vim.keymap.set("n", "<A-Down>", "<cmd>:resize -2<CR>")
@@ -19,4 +23,3 @@ vim.keymap.set("n", "<A-Right>", "<cmd>:vertical resize +2<CR>")
 
 vim.keymap.set("n", "<leader>ba", "<cmd>:bufdo bd<CR>")
 vim.keymap.set("n", "<leader>rn", ":IncRename ")
-

@@ -13,8 +13,9 @@ return {
         css = { "prettier" },
         scss = { "prettier" },
         json = { "biome" },
-        go = { "gofmt", "gofumpt", "goimports", "golines"},
+        go = { "gofmt", "gofumpt", "goimports", "golines" },
         xml = { "xmlformatter" },
+        htmlangular = { "prettier" },
       },
 
       formatters = {

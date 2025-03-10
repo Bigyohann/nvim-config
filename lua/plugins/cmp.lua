@@ -5,7 +5,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = {
-        formatting = {
+      formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
           local kind = require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
