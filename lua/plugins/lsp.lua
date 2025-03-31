@@ -6,102 +6,110 @@ return {
       -- "hrsh7th/cmp-nvim-lsp",
       { "antosha417/nvim-lsp-file-operations", config = true },
     },
-    opts = {
-      autoformat = false,
-    },
-    config = function()
-      -- import lspconfig plugin
-      local lspconfig = require("lspconfig")
-      require("lsp-file-operations").setup()
-      vim.diagnostic.config({
-        underline = true,
-        update_in_insert = false,
-        virtual_text = {
-          spacing = 4,
-          source = "if_many",
-          prefix = "●",
-          -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-          -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-          -- prefix = "icons",
-        },
-        severity_sort = true,
-        signs = {
-          text = {
-            [vim.diagnostic.severity.ERROR] = LazyVim.config.icons.diagnostics.Error,
-            [vim.diagnostic.severity.WARN] = LazyVim.config.icons.diagnostics.Warn,
-            [vim.diagnostic.severity.HINT] = LazyVim.config.icons.diagnostics.Hint,
-            [vim.diagnostic.severity.INFO] = LazyVim.config.icons.diagnostics.Info,
-          },
-        },
-      })
-      -- import cmp-nvim-lsp plugin
-      local keymap = vim.keymap -- for conciseness
+    opts = function(_, opts)
+      opts.autoformat = false
 
-      local opts = { noremap = true, silent = true }
-      local on_attach = function(client, bufnr)
-        opts.buffer = bufnr
-
-        -- set keybinds
-        opts.desc = "Show LSP references"
-        keymap.set("n", "gR", "<cmd>Telescope lsp_references <CR>", opts) -- show definition, references
-
-        opts.desc = "Go to declaration"
-        keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
-
-        opts.desc = "Show LSP definitions"
-        keymap.set("n", "gd", "<cmd>Telescope lsp_definitions <CR>", opts) -- show lsp definitions
-
-        opts.desc = "Show LSP implementations"
-        keymap.set("n", "gi", "<cmd>Telescope lsp_implementations <CR>", opts) -- show lsp implementations
-
-        opts.desc = "Show LSP type definitions"
-        keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions <CR>", opts) -- show lsp type definitions
-
-        opts.desc = "See available code actions"
-        keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts) -- see available code actions, in visual mode will apply to selection
-
-        opts.desc = "Smart rename"
-        keymap.set("n", "<leader>ra", vim.lsp.buf.rename, opts) -- smart rename
-
-        opts.desc = "Show buffer diagnostics"
-        keymap.set("n", "<leader>D", "Telescope diagnostics bufnr=0 <CR>", opts) -- show  diagnostics for file
-
-        opts.desc = "Show line diagnostics"
-        keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
-
-        opts.desc = "Go to previous diagnostic"
-        keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
-
-        opts.desc = "Go to next diagnostic"
-        keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
-
-        opts.desc = "Show documentation for what is under cursor"
-        keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
-
-        opts.desc = "Restart LSP"
-        keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+      local defaultServers = {
+        "html",
+        "cssls",
+        "ts_ls",
+        "clangd",
+        "jsonls",
+        "bashls",
+        "lua_ls",
+        "dockerls",
+        "yamlls",
+        "docker_compose_language_service",
+        "gopls",
+        "gitlab_ci_ls",
+        "sqlls",
+        "yamlls",
+        "pylsp",
+        "volar",
+      }
+      for _, server in ipairs(defaultServers) do
+        opts.servers[server] = {}
       end
 
-      -- used to enable autocompletion (assign to every lsp server config)
-      local capabilities = cmp_nvim_lsp.default_capabilities()
-      capabilities.workspace = {
-        fileOperations = {
-          didRename = true,
-          willRename = true,
-        },
+      local phpStubs = {
+        "apache",
+        "bcmath",
+        "bz2",
+        "calendar",
+        "com_dotnet",
+        "Core",
+        "ctype",
+        "curl",
+        "date",
+        "dba",
+        "dom",
+        "ds",
+        "enchant",
+        "exif",
+        "fileinfo",
+        "filter",
+        "fpm",
+        "ftp",
+        "gd",
+        "hash",
+        "iconv",
+        "imap",
+        "interbase",
+        "intl",
+        "json",
+        "ldap",
+        "libxml",
+        "mbstring",
+        "mcrypt",
+        "meta",
+        "mssql",
+        "mysqli",
+        "oci8",
+        "odbc",
+        "openssl",
+        "pcntl",
+        "pcre",
+        "PDO",
+        "pdo_ibm",
+        "pdo_mysql",
+        "pdo_pgsql",
+        "pdo_sqlite",
+        "pgsql",
+        "Phar",
+        "posix",
+        "pspell",
+        "readline",
+        "recode",
+        "Reflection",
+        "regex",
+        "session",
+        "shmop",
+        "SimpleXML",
+        "snmp",
+        "soap",
+        "sockets",
+        "sodium",
+        "SPL",
+        "sqlite3",
+        "standard",
+        "superglobals",
+        "sybase",
+        "sysvmsg",
+        "sysvsem",
+        "sysvshm",
+        "tidy",
+        "tokenizer",
+        "wddx",
+        "xml",
+        "xmlreader",
+        "xmlrpc",
+        "xmlwriter",
+        "Zend OPcache",
+        "zip",
+        "zlib",
       }
 
-      -- Change the Diagnostic symbols in the sign column (gutter)
-      -- (not in youtube nvim video)
-      local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
-
-      lspconfig["intelephense"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
+      opts.servers.intelephense = {
         settings = {
           intelephense = {
             files = {
@@ -119,104 +127,16 @@ return {
                 "**/var/**",
               },
             },
-            stubs = {
-              "apache",
-              "bcmath",
-              "bz2",
-              "calendar",
-              "com_dotnet",
-              "Core",
-              "ctype",
-              "curl",
-              "date",
-              "dba",
-              "dom",
-              "ds",
-              "enchant",
-              "exif",
-              "fileinfo",
-              "filter",
-              "fpm",
-              "ftp",
-              "gd",
-              "hash",
-              "iconv",
-              "imap",
-              "interbase",
-              "intl",
-              "json",
-              "ldap",
-              "libxml",
-              "mbstring",
-              "mcrypt",
-              "meta",
-              "mssql",
-              "mysqli",
-              "oci8",
-              "odbc",
-              "openssl",
-              "pcntl",
-              "pcre",
-              "PDO",
-              "pdo_ibm",
-              "pdo_mysql",
-              "pdo_pgsql",
-              "pdo_sqlite",
-              "pgsql",
-              "Phar",
-              "posix",
-              "pspell",
-              "readline",
-              "recode",
-              "Reflection",
-              "regex",
-              "session",
-              "shmop",
-              "SimpleXML",
-              "snmp",
-              "soap",
-              "sockets",
-              "sodium",
-              "SPL",
-              "sqlite3",
-              "standard",
-              "superglobals",
-              "sybase",
-              "sysvmsg",
-              "sysvsem",
-              "sysvshm",
-              "tidy",
-              "tokenizer",
-              "wddx",
-              "xml",
-              "xmlreader",
-              "xmlrpc",
-              "xmlwriter",
-              "Zend OPcache",
-              "zip",
-              "zlib",
-            },
+            stubs = phpStubs,
           },
         },
-      })
+      }
 
-      -- configure prisma orm server
-      lspconfig["prismals"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-
-      -- configure graphql language server
-      lspconfig["graphql"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
+      opts.servers.graphql = {
         filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-      })
+      }
 
-      -- configure emmet language server
-      lspconfig["emmet_ls"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
+      opts.servers.emmet_ls = {
         filetypes = {
           "html",
           "typescriptreact",
@@ -228,77 +148,40 @@ return {
           "svelte",
           "htmlangular",
         },
-      })
+      }
 
-      lspconfig["biome"].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = { "json" },
-      })
-
-      local languageServerPath = "/opt/homebrew/lib/"
-
-      local cmd =
-        { "ngserver", "--stdio", "--tsProbeLocations", languageServerPath, "--ngProbeLocations", languageServerPath }
-
-      lspconfig["angularls"].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        cmd = cmd,
-        on_new_config = function(new_config)
-          new_config.cmd = cmd
-        end,
-      })
-
-      lspconfig.ts_ls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-        init_options = {
-          plugins = { -- I think this was my breakthrough that made it work
-            {
-              name = "@vue/typescript-plugin",
-              location = languageServerPath .. "@vue/language-server",
-              languages = { "vue" },
-            },
-          },
-        },
-        filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-      })
-
-      lspconfig.volar.setup({})
-
-      lspconfig["twiggy_language_server"].setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
+      opts.servers.twiggy_language_server = {
         filetypes = { "twig" },
         cmd = { "twiggy-language-server", "--stdio" },
-      })
-
-
-      local servers = {
-        "html",
-        "cssls",
-        -- "tsls",
-        "clangd",
-        "jsonls",
-        "bashls",
-        "lua_ls",
-        "dockerls",
-        "yamlls",
-        "docker_compose_language_service",
-        "gopls",
-        "gitlab_ci_ls",
-        "sqlls",
-        "yamlls",
-        "pylsp"
       }
-      for _, lsp in ipairs(servers) do
-        lspconfig[lsp].setup({
-          on_attach = on_attach,
-          capabilities = capabilities,
-        })
-      end
+
+      -- local languageServerPath = "/opt/homebrew/lib/"
+      -- local cmd =
+      --   { "ngserver", "--stdio", "--tsProbeLocations", languageServerPath, "--ngProbeLocations", languageServerPath }
+      --
+      -- opts.servers.angularls = {
+      --   cmd = cmd,
+      --   on_new_config = function(new_config)
+      --     new_config.cmd = cmd
+      --   end,
+      -- }
+
+      -- opts.servers.vtsls = {
+      --   init_options = {
+      --     plugins = {
+      --       {
+      --         name = "@vue/typescript-plugin",
+      --         location = languageServerPath .. "@vue/language-server",
+      --         languages = { "vue" },
+      --       },
+      --     },
+      --   },
+      --   filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+      -- }
+
+      opts.servers.biome = {
+        filetypes = { "json" },
+      }
     end,
   },
-  { "antosha417/nvim-lsp-file-operations" },
 }
