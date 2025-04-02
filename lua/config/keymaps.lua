@@ -25,11 +25,7 @@ vim.keymap.set("n", "<leader>ba", "<cmd>:bufdo bd<CR>")
 vim.keymap.set("n", "<leader>rn", ":IncRename ")
 
 -- set keybinds
--- vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references <CR>") -- show definition, references
--- vim.keymap.set("n", "gD", vim.lsp.buf.declaration) -- go to declaration
--- vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions <CR>") -- show lsp definitions
--- vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations <CR>") -- show lsp implementations
--- vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions <CR>") -- show lsp type definitions
+
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action) -- see available code actions, in visual mode will apply to selection
 vim.keymap.set("n", "<leader>ra", vim.lsp.buf.rename) -- smart rename
 vim.keymap.set("n", "K", vim.lsp.buf.hover) -- show documentation for what is under cursor
