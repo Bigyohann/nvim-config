@@ -12,7 +12,6 @@ return { -- change some telescope options and a keymap to browse plugin files
       { "<leader>gd", "<cmd> Telescope lsp_definitions <cr>", desc = "Find definitions" },
       { "<leader>gi", "<cmd> Telescope lsp_implementations <cr>", desc = "Find implementations" },
       { "<leader>gt", "<cmd> Telescope lsp_type_definitions <cr>", desc = "Find type definitions" },
-
     },
     opts = {
       defaults = {

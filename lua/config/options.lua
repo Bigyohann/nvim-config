@@ -9,7 +9,6 @@ vim.opt.relativenumber = true
 -- Disable animations
 vim.g.snacks_animate = false
 
-
 if vim.g.neovide then
   vim.o.guifont = "JetBrainsMono Nerd Font:h14"
 end
