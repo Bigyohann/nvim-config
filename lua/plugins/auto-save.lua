@@ -9,6 +9,13 @@ return {
           cancel_deferred_save = { "InsertEnter" }, -- vim events that cancel a pending deferred save
         },
       },
+      condition = function(buf)
+        local filetype = vim.fn.getbufvar(buf, "&filetype")
+        if vim.list_contains({ "harpoon" }, filetype) then
+          return false
+        end
+        return true
+      end,
     },
   },
 }
