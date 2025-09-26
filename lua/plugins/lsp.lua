@@ -53,6 +53,7 @@ return {
         "gd",
         "hash",
         "iconv",
+        "imagick",
         "imap",
         "interbase",
         "intl",
