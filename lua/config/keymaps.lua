@@ -3,8 +3,10 @@
 -- Add any additional keymaps here
 local map = LazyVim.safe_keymap_set
 
+
 vim.g.copilot_no_tab_map = true
-vim.api.nvim_set_keymap("i", "<C-j>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
+
 vim.keymap.set("n", "<C-h>", "<cmd>:TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<C-j>", "<cmd>:TmuxNavigateDown<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>:TmuxNavigateUp<CR>")
@@ -29,4 +31,4 @@ vim.keymap.set("n", "<leader>rn", ":IncRename ")
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action) -- see available code actions, in visual mode will apply to selection
 vim.keymap.set("n", "<leader>ra", vim.lsp.buf.rename) -- smart rename
 vim.keymap.set("n", "K", vim.lsp.buf.hover) -- show documentation for what is under cursor
-vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>") -- mapping to restart lsp if necessary
+vim.keymap.set("n", "<leader>ro", ":LspRestart<CR>") -- mapping to restart lsp if necessary
