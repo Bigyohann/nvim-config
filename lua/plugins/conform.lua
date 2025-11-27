@@ -17,6 +17,7 @@ return {
         xml = { "xmlformatter" },
         htmlangular = { "prettier" },
         vue = { "prettier" },
+        sql = { "pgformatter" },
       },
 
       formatters = {
