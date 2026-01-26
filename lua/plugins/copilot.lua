@@ -9,26 +9,25 @@ return {
   --     strategies = {
   --       -- Change the default chat adapter
   --       chat = {
-  --         adapter = "qwen",
+  --         adapter = "gemini_cli",
   --       },
   --       inline = {
-  --         adapter = "qwen",
+  --         adapter = "gemini_cli",
   --       },
   --       cmd = {
-  --         "qwen",
+  --         "gemini_cli",
   --       },
   --     },
   --     adapters = {
-  --       qwen = function()
-  --         return require("codecompanion.adapters").extend("ollama", {
-  --           name = "qwen", -- Give this adapter a different name to differentiate it from the default ollama adapter
-  --           schema = {
-  --             model = {
-  --               default = "codellama:code",
+  --       acp = {
+  --         gemini_cli = function()
+  --           return require("codecompanion.adapters").extend("gemini_cli", {
+  --             defaults = {
+  --               auth_method = "oauth-personal", -- "oauth-personal"|"gemini-api-key"|"vertex-ai"
   --             },
-  --           },
-  --         })
-  --       end,
+  --           })
+  --         end,
+  --       },
   --     },
   --     -- NOTE: The log_level is in `opts.opts`
   --     opts = {

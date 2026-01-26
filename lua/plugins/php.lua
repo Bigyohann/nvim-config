@@ -1,7 +1,9 @@
 return {
   {
-    "jorismak/php.easy.nvim",
+    "php.easy.nvim",
+    name = "php_easy",
     config = true,
+    dev = true,
     keys = {
       { "-b", "<CMD>PHPEasyDocBlock<CR>" },
       { "-r", "<CMD>PHPEasyReplica<CR>" },
@@ -17,6 +19,12 @@ return {
       { "-m", "<CMD>PHPEasyAppendMethod<CR>", mode = { "n", "v" } },
       { "-_", "<CMD>PHPEasyAppendConstruct<CR>" },
       { "-a", "<CMD>PHPEasyAppendArgument<CR>" },
+      { "-#", "<CMD>PHPEasyAttribute<CR>", ft = "php" },
+      { "-uu", "<CMD>PHPEasyRemoveUnusedUses<CR>", ft = "php" },
+      { "-e", "<CMD>PHPEasyExtends<CR>", ft = "php" },
+      { "-i", "<CMD>PHPEasyImplements<CR>", ft = "php" },
+      { "_i", "<CMD>PHPEasyAppendInvoke<CR>", ft = "php" },
     },
   },
 }
+

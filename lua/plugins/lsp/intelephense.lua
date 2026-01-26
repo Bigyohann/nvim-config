@@ -46,6 +46,7 @@ local phpStubs = {
   "Phar",
   "posix",
   "pspell",
+  "random",
   "readline",
   "recode",
   "Reflection",

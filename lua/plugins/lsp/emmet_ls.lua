@@ -9,5 +9,6 @@ return {
     "less",
     "svelte",
     "htmlangular",
+    "twig"
   },
 }
