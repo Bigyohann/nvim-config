@@ -69,6 +69,7 @@ local phpStubs = {
   "tidy",
   "tokenizer",
   "wddx",
+  "wordpress",
   "xml",
   "xmlreader",
   "xmlrpc",

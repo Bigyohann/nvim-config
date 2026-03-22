@@ -4,7 +4,9 @@ return {
 
     opts = function()
       local dap = require("dap")
-      local path = require("mason-registry").get_package("php-debug-adapter"):get_install_path()
+      local masonPath = require("mason.settings").current.install_root_dir
+      local path = masonPath .. "/packages/php-debug-adapter/extension"
+      print(masonPath)
       dap.adapters.php = {
         type = "executable",
         command = "node",
