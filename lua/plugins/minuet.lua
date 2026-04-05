@@ -1,0 +1,53 @@
+return {
+  -- {
+  --   "milanglacier/minuet-ai.nvim",
+  --   dependencies = { "nvim-lua/plenary.nvim" },
+  --   config = function()
+  --     require("minuet").setup({
+  --       provider = "openai_fim_compatible",
+  --       n_completions = 1, -- Recommended for local models
+  --       context_window = 512, -- Start small to save resources
+  --       provider_options = {
+  --         openai_fim_compatible = {
+  --           model = "codellama:7b-code",
+  --           end_point = "http://localhost:11434/v1/completions",
+  --           api_key = "TERM",
+  --           name = "Ollama",
+  --           stream = true,
+  --           optional = {
+  --             max_tokens = 256,
+  --             top_p = 0.9,
+  --             stop = {
+  --               "<EOT>",
+  --               "<PRE>",
+  --               "<MID>",
+  --               "<SUF>",
+  --               "<FILE_SEPARATOR>",
+  --               "\n\n",
+  --               " <EOT>",
+  --               "<EOT> ",
+  --               " <EOT> ",
+  --               "eot",
+  --               "<|endoftext|>",
+  --               "<|file_separator|>",
+  --               "<|end_of_sentence|>",
+  --               "\4",
+  --             },
+  --           },
+  --         },
+  --       },
+  --       virtualtext = {
+  --         auto_trigger_ft = { "*" }, -- Enable auto-trigger for all filetypes
+  --         keymap = {
+  --           accept = "<C-j>",
+  --           accept_line = "<A-a>",
+  --           prev = "<A-[>",
+  --           next = "<A-]>",
+  --           dismiss = "<A-e>",
+  --         },
+  --       },
+  --       throttle = 1000, -- Throttle requests to Ollama (ms)
+  --     })
+  --   end,
+  -- },
+}

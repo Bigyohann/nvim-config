@@ -16,7 +16,6 @@ return {
         "gitlab-ci-ls",
         "hadolint",
         "html-lsp",
-        "intelephense",
         "json-lsp",
         "jsonlint",
         "lua-language-server",
