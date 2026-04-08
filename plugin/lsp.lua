@@ -10,10 +10,14 @@ vim.pack.add({
 })
 
 local ok_lazydev, lazydev = pcall(require, "lazydev")
-if ok_lazydev then lazydev.setup() end
+if ok_lazydev then
+  lazydev.setup()
+end
 
 local ok_lsp_file_ops, lsp_file_ops = pcall(require, "lsp-file-operations")
-if ok_lsp_file_ops then lsp_file_ops.setup() end
+if ok_lsp_file_ops then
+  lsp_file_ops.setup()
+end
 
 local servers = {
   "gopls",

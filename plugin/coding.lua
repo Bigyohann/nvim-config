@@ -1,5 +1,7 @@
 -- Coding Categorized Plugins (Completion, Formatting, Snippets, AI)
 
+local setup_plugin = require("config.utils").setup
+
 -- Step 1: Completion (Cmp)
 vim.pack.add({
   { src = "https://github.com/hrsh7th/nvim-cmp" },
@@ -11,8 +13,7 @@ vim.pack.add({
   { src = "https://github.com/editorconfig/editorconfig-vim" },
 })
 
-local ok_cmp, cmp = pcall(require, "cmp")
-if ok_cmp then
+setup_plugin("cmp", function(cmp)
   local lspkind = require("lspkind")
 
   cmp.setup({
@@ -77,7 +78,7 @@ if ok_cmp then
       }),
     },
   })
-end
+end)
 
 -- Step 2: Snippets & Text Objects
 vim.pack.add({
@@ -86,17 +87,16 @@ vim.pack.add({
   { src = "https://github.com/echasnovski/mini.nvim" },
 })
 
-local ok_luasnip, luasnip = pcall(require, "luasnip")
-if ok_luasnip then
+setup_plugin("luasnip", function(luasnip)
   luasnip.setup({})
   require("luasnip.loaders.from_vscode").lazy_load()
-end
+end)
 
 -- Mini plugins
-local function setup_mini(name)
+local function setup_mini(name, opts)
   local ok, plugin = pcall(require, "mini." .. name)
   if ok then
-    plugin.setup({})
+    plugin.setup(opts or {})
   end
 end
 
@@ -106,8 +106,7 @@ setup_mini("ai")
 
 -- Step 3: Formatting (Conform)
 vim.pack.add({ { src = "https://github.com/stevearc/conform.nvim" } })
-local ok_conform, conform = pcall(require, "conform")
-if ok_conform then
+setup_plugin("conform", function(conform)
   conform.setup({
     formatters_by_ft = {
       lua = { "stylua" },
@@ -157,7 +156,7 @@ if ok_conform then
   vim.keymap.set({ "n", "v" }, "<leader>cf", function()
     conform.format({ lsp_fallback = true, async = false, timeout_ms = 500 })
   end, { desc = "Format file or range (Conform)" })
-end
+end)
 
 -- Step 4: AI Tools (Windsurf)
 vim.pack.add({
@@ -174,10 +173,8 @@ vim.g.windsurf_filetypes = {
 }
 vim.g.codeium_no_map_tab = 1
 
-local ok_windsurf, windsurf = pcall(require, "codeium")
-if ok_windsurf then
-  windsurf.setup({})
-end
+setup_plugin("codeium", {})
+
 -- Windsurf keymaps
 -- Accept completion with Ctrl+j or <Tab> (if you prefer)
 vim.keymap.set("i", "<C-j>", function()
@@ -214,18 +211,14 @@ vim.api.nvim_set_hl(0, "WindsurfSuggestion", { link = "Comment" })
 
 -- Step 5: Autotag
 vim.pack.add({ { src = "https://github.com/windwp/nvim-ts-autotag" } })
-local ok_autotag, autotag = pcall(require, "nvim-ts-autotag")
-if ok_autotag then
-  autotag.setup()
-end
+setup_plugin("nvim-ts-autotag", {})
 
 -- Add php specific plugins
 vim.pack.add({
   { src = "https://github.com/ta-tikoma/php.easy.nvim" },
 })
 
-local ok_php_easy, php_easy = pcall(require, "php-easy-nvim")
-if ok_php_easy then
+setup_plugin("php-easy-nvim", function(php_easy)
   php_easy.setup({})
 
   vim.api.nvim_create_autocmd("FileType", {
@@ -253,4 +246,4 @@ if ok_php_easy then
       vim.keymap.set("n", "_i", "<CMD>PHPEasyAppendInvoke<CR>", opts)
     end,
   })
-end
+end)
