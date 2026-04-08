@@ -3,7 +3,7 @@ vim.pack.add({
   {
     src = "https://github.com/nvim-treesitter/nvim-treesitter",
     version = "main",
-  }
+  },
 })
 
 local ok, ts_configs = pcall(require, "nvim-treesitter.configs")

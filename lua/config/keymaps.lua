@@ -7,18 +7,18 @@ local map = vim.keymap.set
 vim.g.copilot_no_tab_map = true
 
 -- Original Keymaps
-map("n", "<C-z>", "nop")
+map("n", "<C-z>", "nop", { desc = "Disable suspend" })
 map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
-map("n", "<leader>md", '$F"ci"@datetime@<Esc>')
-map("n", "<leader>mt", '$F"ci"@date@<Esc>')
-map("n", "<leader>ms", '$F"ci"@string@<Esc>')
+map("n", "<leader>md", '$F"ci"@datetime@<Esc>', { desc = "Insert datetime" })
+map("n", "<leader>mt", '$F"ci"@date@<Esc>', { desc = "Insert date" })
+map("n", "<leader>ms", '$F"ci"@string@<Esc>', { desc = "Insert string" })
 
 -- resize windows
-map("n", "<A-Up>", "<cmd>:resize +2<CR>")
-map("n", "<A-Down>", "<cmd>:resize -2<CR>")
-map("n", "<A-Left>", "<cmd>:vertical resize -2<CR>")
-map("n", "<A-Right>", "<cmd>:vertical resize +2<CR>")
+map("n", "<A-Up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
+map("n", "<A-Down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
+map("n", "<A-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
+map("n", "<A-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
 
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
@@ -30,9 +30,9 @@ map("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
 map("n", "<leader>q", "<cmd>qa<CR>", { desc = "Quit all" })
 map("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit all" })
-map("n", "<leader>ba", "<cmd>:bufdo bd<CR>")
-map("n", "<leader>bd", "<cmd>:bd<CR>", { desc = "Delete buffer" })
-map("n", "<leader>rn", ":IncRename ")
+map("n", "<leader>ba", "<cmd>bufdo bd<CR>", { desc = "Delete all buffers" })
+map("n", "<leader>bd", "<cmd>bd<CR>", { desc = "Delete buffer" })
+map("n", "<leader>rn", ":IncRename ", { desc = "Incremental rename" })
 
 -- LSP / LSP set keybinds
 map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
@@ -42,16 +42,16 @@ map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 map("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
-map("n", "<leader>ro", ":LspRestart<CR>", { desc = "Restart LSP" })
+map("n", "<leader>ro", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
 
 -- Yank / Paste
 map({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
 map("n", "<leader>Y", [["+Y]], { desc = "Yank line to system clipboard" })
-map({ "n", "v" }, "<leader>d", "\"_d", { desc = "Delete without yanking" })
+map({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete without yanking" })
 map("x", "p", [["_dP]], { desc = "Paste without yanking" })
 
 -- Tmux / TMS Integration
-map("n", "<C-f>", "<cmd>silent !tmux display-popup -E tms<CR>")
+map("n", "<C-f>", "<cmd>silent !tmux display-popup -E tms<CR>", { desc = "TMS Search Sessions" })
 map("n", "<leader>ta", "<cmd>silent !tmux display-popup -E 'tms switch'<CR>", { desc = "Switch sessions actives" })
 map("n", "<leader>tw", "<cmd>silent !tmux display-popup -E 'tms windows'<CR>", { desc = "Switch windows" })
 map("n", "<leader>tr", ":!tms rename ", { desc = "Rename session" })

@@ -13,16 +13,32 @@ local ok_dapui, dapui = pcall(require, "dapui")
 
 if ok_dap and ok_dapui then
   dapui.setup()
-  
-  dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
-  dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
-  dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
-  vim.keymap.set("n", "<leader>du", function() dapui.toggle() end, { desc = "DAP UI" })
-  vim.keymap.set("n", "<leader>db", function() dap.toggle_breakpoint() end, { desc = "Breakpoint" })
-  vim.keymap.set("n", "<leader>dc", function() dap.continue() end, { desc = "Continue" })
-  vim.keymap.set("n", "<leader>di", function() dap.step_into() end, { desc = "Step Into" })
-  vim.keymap.set("n", "<leader>do", function() dap.step_over() end, { desc = "Step Over" })
+  dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+  end
+  dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+  end
+  dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+  end
+
+  vim.keymap.set("n", "<leader>du", function()
+    dapui.toggle()
+  end, { desc = "DAP UI" })
+  vim.keymap.set("n", "<leader>db", function()
+    dap.toggle_breakpoint()
+  end, { desc = "Breakpoint" })
+  vim.keymap.set("n", "<leader>dc", function()
+    dap.continue()
+  end, { desc = "Continue" })
+  vim.keymap.set("n", "<leader>di", function()
+    dap.step_into()
+  end, { desc = "Step Into" })
+  vim.keymap.set("n", "<leader>do", function()
+    dap.step_over()
+  end, { desc = "Step Over" })
 end
 
 -- Step 2: Neotest
@@ -39,9 +55,15 @@ if ok_neotest then
     },
   })
 
-  vim.keymap.set("n", "<leader>tr", function() neotest.run.run() end, { desc = "Run nearest test" })
-  vim.keymap.set("n", "<leader>tf", function() neotest.run.run(vim.fn.expand("%")) end, { desc = "Run current file" })
-  vim.keymap.set("n", "<leader>ts", function() neotest.summary.toggle() end, { desc = "Toggle summary" })
+  vim.keymap.set("n", "<leader>tr", function()
+    neotest.run.run()
+  end, { desc = "Run nearest test" })
+  vim.keymap.set("n", "<leader>tf", function()
+    neotest.run.run(vim.fn.expand("%"))
+  end, { desc = "Run current file" })
+  vim.keymap.set("n", "<leader>ts", function()
+    neotest.summary.toggle()
+  end, { desc = "Toggle summary" })
 end
 
 -- Step 3: Diffview

@@ -1,0 +1,11 @@
+# Selene configuration for Neovim config
+std = "roblox" # Using roblox std because it includes many common globals, or we can use "luajit"
+
+[config]
+# Ignore some common Neovim globals
+globals = ["vim", "it", "describe", "before_each", "after_each", "teardown", "setup"]
+
+[rules]
+# Add any specific rules here
+unused_variable = "warn"
+multiple_statements = "allow"

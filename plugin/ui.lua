@@ -5,7 +5,7 @@ vim.pack.add({
   {
     src = "https://github.com/catppuccin/nvim",
     name = "catppuccin",
-  }
+  },
 })
 
 local ok_catppuccin, catppuccin = pcall(require, "catppuccin")
@@ -109,18 +109,30 @@ if ok_lualine then
       },
       lualine_x = {
         {
-          function() return require("noice").api.status.command.get() end,
-          cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+          function()
+            return require("noice").api.status.command.get()
+          end,
+          cond = function()
+            return package.loaded["noice"] and require("noice").api.status.command.has()
+          end,
           color = { fg = "#ff9e64" },
         },
         {
-          function() return require("noice").api.status.mode.get() end,
-          cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+          function()
+            return require("noice").api.status.mode.get()
+          end,
+          cond = function()
+            return package.loaded["noice"] and require("noice").api.status.mode.has()
+          end,
           color = { fg = "#ff9e64" },
         },
         {
-          function() return "  " .. (package.loaded["dap"] and require("dap").status() or "") end,
-          cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+          function()
+            return "  " .. (package.loaded["dap"] and require("dap").status() or "")
+          end,
+          cond = function()
+            return package.loaded["dap"] and require("dap").status() ~= ""
+          end,
           color = { fg = "#ff9e64" },
         },
         { "diff" },
@@ -130,7 +142,9 @@ if ok_lualine then
         { "location", padding = { left = 0, right = 1 } },
       },
       lualine_z = {
-        function() return "  " .. os.date("%R") end,
+        function()
+          return "  " .. os.date("%R")
+        end,
       },
     },
   })
@@ -239,8 +253,12 @@ if ok_gitsigns then
           gs.nav_hunk("prev")
         end
       end, "Prev Hunk")
-      map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
-      map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
+      map("n", "]H", function()
+        gs.nav_hunk("last")
+      end, "Last Hunk")
+      map("n", "[H", function()
+        gs.nav_hunk("first")
+      end, "First Hunk")
 
       -- Actions
       map({ "n", "v" }, "<leader>ghs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
@@ -249,9 +267,13 @@ if ok_gitsigns then
       map("n", "<leader>ghu", gs.undo_stage_hunk, "Undo Stage Hunk")
       map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
       map("n", "<leader>ghp", gs.preview_hunk_inline, "Preview Hunk Inline")
-      map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
+      map("n", "<leader>ghb", function()
+        gs.blame_line({ full = true })
+      end, "Blame Line")
       map("n", "<leader>ghd", gs.diffthis, "Diff This")
-      map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
+      map("n", "<leader>ghD", function()
+        gs.diffthis("~")
+      end, "Diff This ~")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
     end,
   })
