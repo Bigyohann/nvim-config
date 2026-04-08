@@ -1,18 +1,6 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
--- Add any additional autocmds here
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "php",
-  callback = function()
-    vim.opt.shiftwidth = 4
-    vim.opt.tabstop = 4
-    vim.opt.softtabstop = 4
-  end,
-})
-
 -- Disable autoformat for lua files
 vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "lua", "php", "yml", "yaml" },
+  pattern = { "lua", "php", "yml", "yaml", "htmlangular", "typescript", "javascript" },
   callback = function()
     vim.b.autoformat = false
   end,
@@ -20,14 +8,34 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.filetype.add({
   pattern = {
-    [".*%.component%.html"] = "htmlangular", -- Sets the filetype to `htmlangular` if it matches the pattern
+    [".*%.component%.html"] = "htmlangular",
+    [".*%.container%.html"] = "htmlangular",
+    [".*%.page%.html"] = "htmlangular",
+    [".*%.view%.html"] = "htmlangular",
   },
 })
 
 vim.filetype.add({
   pattern = {
     [".*%.blade%.php"] = "blade",
+    ["Dockerfile.*"] = "dockerfile",
+    ["docker-compose.*"] = "yaml.docker-compose",
   },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "*" },
+  callback = function()
+    local filetype = vim.bo.filetype
+    if filetype and filetype ~= "" then
+      local success = pcall(function()
+        vim.treesitter.start()
+      end)
+      if success then
+        return
+      end
+    end
+  end,
 })
 
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
