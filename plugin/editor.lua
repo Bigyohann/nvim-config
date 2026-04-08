@@ -60,7 +60,11 @@ if ok_snacks then
 
   -- Common Snacks Mappings
   vim.keymap.set("n", "<leader>e", function() snacks.explorer() end, { desc = "Toggle Explorer" })
-  vim.keymap.set("n", "<leader><leader>", function() snacks.picker.smart() end, { desc = "Smart Open" })
+  vim.keymap.set("n", "<leader><space>", function()
+    snacks.picker.files({
+      exclude = { "vendor", "node_modules", ".git", "dist", "build", "target" },
+    })
+  end, { desc = "Find Files" })
   vim.keymap.set("n", "<leader>ff", function() snacks.picker.files() end, { desc = "Find Files" })
   vim.keymap.set("n", "<leader>fw", function() snacks.picker.grep() end, { desc = "Find Grep" })
   vim.keymap.set("n", "<leader>fb", function() snacks.picker.buffers() end, { desc = "Find Buffers" })
@@ -79,12 +83,13 @@ if ok_snacks then
   vim.keymap.set("n", "<leader>gs", function() snacks.picker.git_status() end, { desc = "Git Status" })
 
   -- LSP Snacks Mappings
+  vim.keymap.set("n", "gd", function() snacks.picker.lsp_definitions() end, { desc = "Goto Definition" })
+  vim.keymap.set("n", "gD", function() snacks.picker.lsp_declarations() end, { desc = "Goto Declaration" })
   vim.keymap.set("n", "gr", function() snacks.picker.lsp_references() end, { nowait = true, desc = "References" })
-  vim.keymap.set("n", "gD", function() snacks.picker.lsp_declarations() end, { desc = "Declaration" })
-  vim.keymap.set("n", "gd", function() snacks.picker.lsp_definitions() end, { desc = "Definition" })
-  vim.keymap.set("n", "gi", function() snacks.picker.lsp_implementations() end, { desc = "Implementation" })
-  vim.keymap.set("n", "gt", function() snacks.picker.lsp_type_definitions() end, { desc = "Type Definition" })
-  vim.keymap.set("n", "<leader>fs", function() snacks.picker.lsp_symbols() end, { desc = "Find symbols" })
+  vim.keymap.set("n", "gI", function() snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" })
+  vim.keymap.set("n", "gy", function() snacks.picker.lsp_type_definitions() end, { desc = "Goto T[y]pe Definition" })
+  vim.keymap.set("n", "<leader>ss", function() snacks.picker.lsp_symbols() end, { desc = "LSP Symbols" })
+  vim.keymap.set("n", "<leader>sS", function() snacks.picker.lsp_workspace_symbols() end, { desc = "LSP Workspace Symbols" })
 
   -- Diagnostics Snacks Mappings
   vim.keymap.set("n", "<leader>ld", function() snacks.picker.diagnostics() end, { desc = "LSP Diagnostics" })
@@ -107,12 +112,14 @@ if ok_wk then
   wk.add({
     { "<leader>f", group = "file/find" },
     { "<leader>g", group = "git" },
+    { "<leader>gh", group = "hunks" },
     { "<leader>t", group = "tmux/session" },
     { "<leader>b", group = "buffer" },
     { "<leader>W", group = "window/swap" },
     { "<leader>m", group = "meta/date" },
     { "<leader>a", group = "ai/gemini" },
-    { "<leader>s", group = "search/noice" },
+    { "<leader>s", group = "search" },
+    { "<leader>c", group = "code" },
     { "<leader>l", group = "lsp/diagnostics" },
     { "<leader>x", group = "diagnostics/trouble" },
     { "g", group = "goto" },

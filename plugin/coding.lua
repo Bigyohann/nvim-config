@@ -113,7 +113,12 @@ if ok_conform then
       lua = { "stylua" },
       fish = { "fish_indent" },
       sh = { "shfmt" },
-      php = { "php_cs_fixer" },
+      php = function(bufnr)
+        if vim.fs.root(bufnr, { "mago.toml" }) then
+          return { "mago_format" }
+        end
+        return { "php_cs_fixer" }
+      end,
       typescript = { "prettierd", "prettier" },
       javascript = { "prettierd", "prettier" },
       html = { "prettier" },

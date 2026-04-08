@@ -8,6 +8,7 @@ vim.g.copilot_no_tab_map = true
 
 -- Original Keymaps
 map("n", "<C-z>", "nop")
+map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })
 
 map("n", "<leader>md", '$F"ci"@datetime@<Esc>')
 map("n", "<leader>mt", '$F"ci"@date@<Esc>')
@@ -34,9 +35,13 @@ map("n", "<leader>bd", "<cmd>:bd<CR>", { desc = "Delete buffer" })
 map("n", "<leader>rn", ":IncRename ")
 
 -- LSP / LSP set keybinds
-map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions" })
-map("n", "<leader>ra", vim.lsp.buf.rename, { desc = "Smart rename" })
-map("n", "K", vim.lsp.buf.hover, { desc = "Hover doc" })
+map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "<leader>ra", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+map("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
 map("n", "<leader>ro", ":LspRestart<CR>", { desc = "Restart LSP" })
 
 -- Yank / Paste

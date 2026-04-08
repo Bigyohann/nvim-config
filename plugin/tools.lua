@@ -49,7 +49,7 @@ vim.pack.add({ { src = "https://github.com/sindrets/diffview.nvim" } })
 local ok_diffview, diffview = pcall(require, "diffview")
 if ok_diffview then
   vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diffview Open" })
-  vim.keymap.set("n", "<leader>gh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File History" })
+  vim.keymap.set("n", "<leader>gfh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File History" })
 end
 
 -- Step 4: Grug-far (Search and Replace)
