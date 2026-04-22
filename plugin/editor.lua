@@ -63,14 +63,17 @@ if ok_snacks then
   vim.keymap.set("n", "<leader>e", function()
     snacks.explorer()
   end, { desc = "Toggle Explorer" })
-  vim.keymap.set("n", "<leader><space>", function()
+  vim.keymap.set("n", "<leader><leader>", function()
     snacks.picker.files({
       exclude = { "vendor", "node_modules", ".git", "dist", "build", "target" },
     })
   end, { desc = "Find Files" })
   vim.keymap.set("n", "<leader>ff", function()
-    snacks.picker.files()
-  end, { desc = "Find Files" })
+    snacks.picker.lsp_workspace_symbols()
+  end, { desc = "LSP Workspace Symbols" })
+  vim.keymap.set("n", "<leader>fs", function()
+    snacks.picker.lsp_symbols()
+  end, { desc = "LSP Symbols" })
   vim.keymap.set("n", "<leader>fw", function()
     snacks.picker.grep()
   end, { desc = "Find Grep" })
@@ -217,27 +220,6 @@ if ok_as then
       return not vim.list_contains({ "harpoon" }, filetype)
     end,
   })
-end
-
--- Step 5: Yanky (Better Yank)
-vim.pack.add({ { src = "https://github.com/gbprod/yanky.nvim" } })
-local ok_yanky, yanky = pcall(require, "yanky")
-if ok_yanky then
-  yanky.setup({
-    highlight = { on_put = true, on_yank = true, timer = 200 },
-  })
-
-  vim.keymap.set({ "n", "x" }, "p", "<Plug>(YankyPutAfter)")
-  vim.keymap.set({ "n", "x" }, "P", "<Plug>(YankyPutBefore)")
-  vim.keymap.set({ "n", "x" }, "gp", "<Plug>(YankyGPutAfter)")
-  vim.keymap.set({ "n", "x" }, "gP", "<Plug>(YankyGPutBefore)")
-  vim.keymap.set("n", "<c-p>", "<Plug>(YankyPreviousRingHistory)")
-  vim.keymap.set("n", "<c-n>", "<Plug>(YankyNextRingHistory)")
-  if snacks then
-    vim.keymap.set("n", "<leader>p", function()
-      snacks.picker.yanky()
-    end, { desc = "Yank History" })
-  end
 end
 
 -- Step 6: Flash (Fast Navigation)

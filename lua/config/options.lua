@@ -3,7 +3,7 @@ vim.g.maplocalleader = " "
 
 vim.g.editorconfig = false
 
--- Disable legacy PHP scripts to force Treesitter
+-- Disable legacy PHP scripts to force our custom indentation/treesitter
 vim.g.loaded_php_syntax = 1
 vim.g.did_indent_php = 1
 

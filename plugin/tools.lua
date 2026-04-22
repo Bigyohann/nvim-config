@@ -41,31 +41,6 @@ if ok_dap and ok_dapui then
   end, { desc = "Step Over" })
 end
 
--- Step 2: Neotest
-vim.pack.add({
-  { src = "https://github.com/nvim-neotest/neotest" },
-  { src = "https://github.com/nvim-neotest/neotest-phpunit" },
-})
-
-local ok_neotest, neotest = pcall(require, "neotest")
-if ok_neotest then
-  neotest.setup({
-    adapters = {
-      require("neotest-phpunit"),
-    },
-  })
-
-  vim.keymap.set("n", "<leader>tr", function()
-    neotest.run.run()
-  end, { desc = "Run nearest test" })
-  vim.keymap.set("n", "<leader>tf", function()
-    neotest.run.run(vim.fn.expand("%"))
-  end, { desc = "Run current file" })
-  vim.keymap.set("n", "<leader>ts", function()
-    neotest.summary.toggle()
-  end, { desc = "Toggle summary" })
-end
-
 -- Step 3: Diffview
 vim.pack.add({ { src = "https://github.com/sindrets/diffview.nvim" } })
 local ok_diffview, diffview = pcall(require, "diffview")

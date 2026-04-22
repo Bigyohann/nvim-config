@@ -18,7 +18,6 @@ local ok_lsp_file_ops, lsp_file_ops = pcall(require, "lsp-file-operations")
 if ok_lsp_file_ops then
   lsp_file_ops.setup()
 end
-
 local servers = {
   "gopls",
   "biome",
@@ -35,7 +34,6 @@ local servers = {
   "lua_ls",
   "marksman",
   "ts_ls",
-  "tailwindcss",
   "yamlls",
 }
 
@@ -74,10 +72,20 @@ end
 local ok_cmp_lsp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 local capabilities = ok_cmp_lsp and cmp_nvim_lsp.default_capabilities() or {}
 
+local config_path = vim.fn.stdpath("config")
+
 for _, server in ipairs(servers) do
   local opts = {
     capabilities = capabilities,
   }
+
+  local custom_config_path = config_path .. "/lsp/" .. server .. ".lua"
+  if vim.fn.filereadable(custom_config_path) == 1 then
+    local custom_opts = dofile(custom_config_path)
+    if type(custom_opts) == "table" then
+      opts = vim.tbl_deep_extend("force", opts, custom_opts)
+    end
+  end
 
   -- Native Neovim 0.12 setup
   vim.lsp.config(server, opts)
