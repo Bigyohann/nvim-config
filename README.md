@@ -1,61 +1,57 @@
-# Personal nvim conf for web development, primarily for PHP and NodeJS/TS
+# ✨ Biggy's Neovim 🚀
 
-## LSP list
+A optimized, LSP-rich Neovim configuration tailored for modern development (Go, Node.js/TypeScript, PHP).
 
-- angular-language-server
-- ast-grep
-- bash-language-server
-- biome
-- clang-format
-- clangd
-- codelldb
-- css-lsp
-- delve
-- deno
-- docker-compose-language-service
-- dockerfile-language-server
-- emmet-ls
-- eslint-lsp
-- eslint_d
-- gitlab-ci-ls
-- gitui
-- gofumpt
-- goimports
-- goimports-reviser
-- golines
-- gomodifytags
-- gopls
-- gotests
-- hadolint
-- html-lsp
-- intelephense
-- js-debug-adapter
-- json-lsp
-- jsonlint
-- lua-language-server
-- markdown-toc
-- markdownlint
-- markdownlint-cli2
-- marksman
-- php-cs-fixer
-- php-debug-adapter
-- phpcs
-- prettier
-- python-lsp-server
-- shellcheck
-- shfmt
-- sqlfluff
-- sqlls
-- sqls
-- stylua
-- twiggy-language-server
-- typescript-language-server
-- vtsls
-- vue-language-server
-- xmlformatter
-- yaml-language-server
+## 🌟 Key Features
 
-## LSP setup
+-   **Full LSP Support**: Out-of-the-box support for 50+ languages and tools.
+-   **Native & Fast**: Plugin management via native `vim.pack` (no heavy plugin managers).
+-   **Pro Tooling**: Integrated debugging (DAP), linting, and formatting.
+-   **Full Stack Ready**: Specialized setups for Go, Node.js/TypeScript, and PHP (Intelephense).
+-   **Portable**: Works seamlessly on macOS and Linux.
 
-This is a oriented config for MacOS, but should work on Linux or Windows as well if you adjust the paths.
-One of this path can be edited in `~/.config/nvim/lua/lsp.lua` with variable `npmGlobalFolderModules`.
+---
+
+## 🛠️ Installation
+
+This configuration is intended to be managed by [Biggy's Dotfiles Engine](https://github.com/Bigyohann/dot-config) via chezmoi, but can be installed manually:
+
+```zsh
+git clone git@github.com:Bigyohann/nvim-config.git ~/.config/nvim
+```
+
+## ⚙️ Requirements
+
+-   **Neovim** >= 0.12.0
+-   **Nerd Font** (JetBrainsMono recommended)
+-   **ripgrep**, **fd**, **fzf**
+
+---
+
+## 🧩 LSP & Tooling Matrix
+
+This config automatically manages the following via `mason.nvim`:
+
+| Category | Tools |
+| :--- | :--- |
+| **Go** | `gopls`, `golangci-lint`, `go-debug-adapter` |
+| **Node/JS/TS** | `typescript-language-server`, `vtsls`, `eslint`, `prettier`, `biome` |
+| **Backend/Systems** | `python-lsp-server`, `clangd`, `sqlls` |
+| **Frameworks** | `angular-language-server`, `vue-language-server`, `emmet-ls` |
+| **DevOps** | `dockerfile-language-server`, `yaml-language-server`, `terraform-ls` |
+| **Formatting** | `stylua`, `shfmt`, `shellcheck`, `markdownlint` |
+| **PHP** | `intelephense`, `php-cs-fixer`, `phpcs`, `php-debug-adapter` |
+
+---
+
+## 📁 Repository Structure
+
+-   `init.lua`: Main entry point.
+-   `lua/`:
+    -   `lsp.lua`: Comprehensive LSP and Mason configuration.
+    -   `plugins/`: Configuration for various plugins.
+-   `snippets/`: Custom language-specific snippets.
+-   `lsp/`: Specialized LSP server settings.
+
+---
+Built with ❤️ by [Biggy](https://github.com/Bigyohann)
