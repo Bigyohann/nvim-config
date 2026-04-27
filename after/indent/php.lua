@@ -1,6 +1,3 @@
--- PHP Indentation configuration (Modern Neovim 0.12 way)
--- Using cindent with custom cinoptions as requested.
-
 local set = vim.opt_local
 
 -- Indentation settings

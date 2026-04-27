@@ -1,0 +1,6 @@
+std="lua51+vim"
+
+[rules]
+unused_variable = "warn"
+multiple_statements = "allow"
+mixed_table = "allow"

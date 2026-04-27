@@ -15,11 +15,6 @@ map("n", "<leader>mt", '$F"ci"@date@<Esc>', { desc = "Insert date" })
 map("n", "<leader>ms", '$F"ci"@string@<Esc>', { desc = "Insert string" })
 
 -- resize windows
-map("n", "<A-Up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
-map("n", "<A-Down>", "<cmd>resize -2<CR>", { desc = "Decrease window height" })
-map("n", "<A-Left>", "<cmd>vertical resize -2<CR>", { desc = "Decrease window width" })
-map("n", "<A-Right>", "<cmd>vertical resize +2<CR>", { desc = "Increase window width" })
-
 -- windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })

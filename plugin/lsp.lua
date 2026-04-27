@@ -28,6 +28,7 @@ local servers = {
   "docker_compose_language_service",
   "dockerls",
   "intelephense",
+  -- "phpantom",
   "gitlab_ci_ls",
   "html",
   "jsonls",

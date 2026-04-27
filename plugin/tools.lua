@@ -43,7 +43,7 @@ end
 
 -- Step 3: Diffview
 vim.pack.add({ { src = "https://github.com/sindrets/diffview.nvim" } })
-local ok_diffview, diffview = pcall(require, "diffview")
+local ok_diffview, _ = pcall(require, "diffview")
 if ok_diffview then
   vim.keymap.set("n", "<leader>gd", "<cmd>DiffviewOpen<cr>", { desc = "Diffview Open" })
   vim.keymap.set("n", "<leader>gfh", "<cmd>DiffviewFileHistory %<cr>", { desc = "File History" })

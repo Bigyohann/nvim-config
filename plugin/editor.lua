@@ -178,24 +178,26 @@ if ok_wk then
   })
 end
 
--- Step 3: Smart Splits & Tmux
+-- Step 3: Smart Splits
 vim.pack.add({
   { src = "https://github.com/mrjones2014/smart-splits.nvim" },
-  { src = "https://github.com/christoomey/vim-tmux-navigator" },
 })
 
 local ok_ss, ss = pcall(require, "smart-splits")
 if ok_ss then
-  ss.setup({ multiplexer_integration = "wezterm" })
-
-  vim.keymap.set("n", "<A-h>", ss.resize_left, { desc = "Resize left" })
-  vim.keymap.set("n", "<A-j>", ss.resize_down, { desc = "Resize down" })
-  vim.keymap.set("n", "<A-k>", ss.resize_up, { desc = "Resize up" })
-  vim.keymap.set("n", "<A-l>", ss.resize_right, { desc = "Resize right" })
+  -- Keybindings for seamless navigation
   vim.keymap.set("n", "<C-h>", ss.move_cursor_left, { desc = "Move to left split" })
-  vim.keymap.set("n", "<C-j>", ss.move_cursor_down, { desc = "Move to bottom split" })
-  vim.keymap.set("n", "<C-k>", ss.move_cursor_up, { desc = "Move to top split" })
+  vim.keymap.set("n", "<C-j>", ss.move_cursor_down, { desc = "Move to below split" })
+  vim.keymap.set("n", "<C-k>", ss.move_cursor_up, { desc = "Move to above split" })
   vim.keymap.set("n", "<C-l>", ss.move_cursor_right, { desc = "Move to right split" })
+
+  -- Keybindings for resizing splits
+  vim.keymap.set("n", "<A-h>", ss.resize_left, { desc = "Resize split left" })
+  vim.keymap.set("n", "<A-j>", ss.resize_down, { desc = "Resize split down" })
+  vim.keymap.set("n", "<A-k>", ss.resize_up, { desc = "Resize split up" })
+  vim.keymap.set("n", "<A-l>", ss.resize_right, { desc = "Resize split right" })
+
+  -- Swap buffers
   vim.keymap.set("n", "<leader>Wh", ss.swap_buf_left, { desc = "Swap buffer left" })
   vim.keymap.set("n", "<leader>Wj", ss.swap_buf_down, { desc = "Swap buffer down" })
   vim.keymap.set("n", "<leader>Wk", ss.swap_buf_up, { desc = "Swap buffer up" })
