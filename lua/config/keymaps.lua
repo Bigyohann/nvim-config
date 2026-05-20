@@ -6,6 +6,8 @@ local map = vim.keymap.set
 
 vim.g.copilot_no_tab_map = true
 
+map("n", "<Esc>", "<cmd>noh<CR>", { desc = "Clear highlights" })
+
 -- Original Keymaps
 map("n", "<C-z>", "nop", { desc = "Disable suspend" })
 map({ "n", "i", "v" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save file" })

@@ -25,6 +25,8 @@ if ok_cmp then
     mapping = cmp.mapping.preset.insert({
       ["<C-b>"] = cmp.mapping.scroll_docs(-4),
       ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-d>"] = cmp.mapping.scroll_docs(4),
+      ["<C-u>"] = cmp.mapping.scroll_docs(-4),
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<C-e>"] = cmp.mapping.abort(),
       ["<CR>"] = cmp.mapping(function(fallback)
@@ -50,10 +52,10 @@ if ok_cmp then
       end, { "i", "s" }),
     }),
     sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 1000, max_item_count = 5 },
-      { name = "luasnip", priority = 750, max_item_count = 3 },
-      { name = "buffer", priority = 500, max_item_count = 3 },
-      { name = "path", priority = 250, max_item_count = 3 },
+      { name = "nvim_lsp", priority = 1000, max_item_count = 30 },
+      { name = "luasnip", priority = 750, max_item_count = 10 },
+      { name = "buffer", priority = 500, max_item_count = 5 },
+      { name = "path", priority = 250, max_item_count = 5 },
     }),
     formatting = {
       format = lspkind.cmp_format({
@@ -130,6 +132,7 @@ if ok_conform then
       htmlangular = { "prettier" },
       vue = { "prettier" },
       sql = { "pgformatter" },
+      toml = { "tombi" },
     },
     formatters = {
       php_cs_fixer = {
