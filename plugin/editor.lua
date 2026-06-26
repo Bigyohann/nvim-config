@@ -224,6 +224,13 @@ if ok_as then
   })
 end
 
+-- Step 5: Marks
+vim.pack.add({ { src = "https://github.com/chentoast/marks.nvim" } })
+local ok_marks, marks = pcall(require, "marks")
+if ok_marks then
+  marks.setup({})
+end
+
 -- Step 6: Flash (Fast Navigation)
 vim.pack.add({ { src = "https://github.com/folke/flash.nvim" } })
 local ok_flash, flash = pcall(require, "flash")

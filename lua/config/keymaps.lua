@@ -39,7 +39,20 @@ map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
 map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 map("i", "<c-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
 map("n", "<leader>cl", "<cmd>LspInfo<cr>", { desc = "Lsp Info" })
-map("n", "<leader>ro", "<cmd>LspRestart<CR>", { desc = "Restart LSP" })
+map("n", "<leader>ro", function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  if #clients == 0 then
+    vim.notify("No active LSP clients to restart", vim.log.levels.WARN)
+    return
+  end
+  for _, client in ipairs(clients) do
+    client:stop()
+  end
+  vim.notify("Restarting LSP clients...", vim.log.levels.INFO)
+  vim.defer_fn(function()
+    vim.api.nvim_exec_autocmds("FileType", { buffer = 0 })
+  end, 200)
+end, { desc = "Restart LSP" })
 
 -- Yank / Paste
 map({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clipboard" })
