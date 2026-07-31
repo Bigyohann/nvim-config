@@ -35,7 +35,67 @@ vim.opt.splitright = true -- Put new windows to the right of the current one
 vim.opt.splitbelow = true -- Put new windows below the current one
 vim.opt.inccommand = "nosplit" -- preview incremental substitute
 vim.opt.cursorline = true -- Enable highlighting of the current line
-vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+
+-- Folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+
+-- Custom fold text to show function/class name
+_G.custom_foldtext = function()
+  local start_line = vim.v.foldstart
+  local end_line = vim.v.foldend
+  local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+
+  local line_to_show = ""
+  local keywords = { "function%s+", "fn%s+", "func%s+", "def%s+", "class%s+", "interface%s+", "enum%s+" }
+
+  -- 1. Try to find a line with a keyword
+  for _, line in ipairs(lines) do
+    local clean_line = vim.trim(line)
+    for _, pattern in ipairs(keywords) do
+      if clean_line:match(pattern) then
+        line_to_show = line
+        break
+      end
+    end
+    if line_to_show ~= "" then
+      break
+    end
+  end
+
+  -- 2. Fallback to first non-blank, non-comment line
+  if line_to_show == "" then
+    for _, line in ipairs(lines) do
+      local clean_line = vim.trim(line)
+      if
+        clean_line ~= ""
+        and not clean_line:match("^%-%-")
+        and not clean_line:match("^//")
+        and not clean_line:match("^/%*")
+        and not clean_line:match("^%*")
+      then
+        line_to_show = line
+        break
+      end
+    end
+  end
+
+  -- 3. Absolute fallback to first line of the fold
+  if line_to_show == "" then
+    line_to_show = lines[1] or ""
+  end
+
+  local num_lines = end_line - start_line + 1
+  local leading_whitespace = line_to_show:match("^(%s*)") or ""
+  local clean_content = vim.trim(line_to_show)
+
+  return leading_whitespace .. "󰁂  " .. clean_content .. "  (" .. num_lines .. " lines)"
+end
+
+vim.opt.foldtext = "v:lua.custom_foldtext()"
+
 -- Indentation
 vim.opt.expandtab = true -- Use spaces instead of tabs
 vim.opt.shiftwidth = 2 -- Size of an indent

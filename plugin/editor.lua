@@ -49,10 +49,20 @@ if ok_snacks then
       layout = {
         preset = "default",
       },
+      actions = {
+        trouble_open = function(picker)
+          local ok, trouble_snack = pcall(require, "trouble.sources.snacks")
+          if ok then
+            trouble_snack.actions.trouble_open(picker)
+          else
+            vim.notify("Trouble.nvim is not loaded!", vim.log.levels.WARN)
+          end
+        end,
+      },
       win = {
         input = {
           keys = {
-            ["<tab>"] = "toggle_preview",
+            ["<c-t>"] = { "trouble_open", mode = { "n", "i" } },
           },
         },
       },
@@ -77,6 +87,33 @@ if ok_snacks then
   vim.keymap.set("n", "<leader>fw", function()
     snacks.picker.grep()
   end, { desc = "Find Grep" })
+  vim.keymap.set("n", "<leader>fg", function()
+    vim.ui.input({ prompt = "Grep Regex: " }, function(pattern)
+      if not pattern or pattern == "" then
+        return
+      end
+      local cmd = { "rg", "--files-with-matches", "--color=never", pattern }
+      local ok, files = pcall(vim.fn.systemlist, cmd)
+      if not ok or vim.v.shell_error ~= 0 or #files == 0 then
+        vim.notify("No files found matching: " .. pattern, vim.log.levels.WARN)
+        return
+      end
+      local items = {}
+      for _, file in ipairs(files) do
+        if file ~= "" then
+          table.insert(items, {
+            text = file,
+            file = file,
+          })
+        end
+      end
+      snacks.picker.pick({
+        title = "Files containing: " .. pattern,
+        items = items,
+        format = "file",
+      })
+    end)
+  end, { desc = "Grep then Find Files" })
   vim.keymap.set("n", "<leader>fb", function()
     snacks.picker.buffers()
   end, { desc = "Find Buffers" })
@@ -295,4 +332,39 @@ if ok_persistence then
   vim.keymap.set("n", "<leader>qd", function()
     persistence.stop()
   end, { desc = "Don't Save Current Session" })
+end
+
+-- Step 10: Harpoon (File Navigation)
+vim.pack.add({
+  { src = "https://github.com/nvim-lua/plenary.nvim" },
+  {
+    src = "https://github.com/ThePrimeagen/harpoon",
+    version = "harpoon2",
+  },
+})
+
+local ok_harpoon, harpoon = pcall(require, "harpoon")
+if ok_harpoon then
+  harpoon:setup({
+    menu = {
+      width = vim.api.nvim_win_get_width(0) - 4,
+    },
+    settings = {
+      save_on_toggle = true,
+    },
+  })
+
+  vim.keymap.set("n", "<leader>H", function()
+    harpoon:list():add()
+  end, { desc = "Harpoon File" })
+
+  vim.keymap.set("n", "<leader>h", function()
+    harpoon.ui:toggle_quick_menu(harpoon:list())
+  end, { desc = "Harpoon Quick Menu" })
+
+  for i = 1, 9 do
+    vim.keymap.set("n", "<leader>" .. i, function()
+      harpoon:list():select(i)
+    end, { desc = "Harpoon to File " .. i })
+  end
 end

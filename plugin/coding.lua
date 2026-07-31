@@ -95,15 +95,25 @@ if ok_luasnip then
 end
 
 -- Mini plugins
-local function setup_mini(name)
+local function setup_mini(name, opts)
   local ok, plugin = pcall(require, "mini." .. name)
   if ok then
-    plugin.setup({})
+    plugin.setup(opts or {})
   end
 end
 
 setup_mini("pairs")
-setup_mini("surround")
+setup_mini("surround", {
+  mappings = {
+    add = "gza", -- Add surrounding in Normal and Visual modes
+    delete = "gzd", -- Delete surrounding
+    find = "gzf", -- Find surrounding (to the right)
+    find_left = "gzF", -- Find surrounding (to the left)
+    highlight = "gzh", -- Highlight surrounding
+    replace = "gzr", -- Replace surrounding
+    update_n_lines = "gzn", -- Update `n_lines`
+  },
+})
 setup_mini("ai")
 
 -- Step 3: Formatting (Conform)
